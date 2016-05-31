@@ -1,0 +1,54 @@
+\begin{thebibliography}{10}
+
+\bibitem{hedgecock2013high}
+Will Hedgecock, Miklos Maroti, Janos Sallai, Peter Volgyesi, and Akos Ledeczi.
+\newblock High-accuracy differential tracking of low-cost gps receivers.
+\newblock In {\em Proceeding of the 11th annual international conference on
+  Mobile systems, applications, and services}, pages 221--234. ACM, 2013.
+
+\bibitem{li2013real}
+Mingyang Li, Byung~Hyung Kim, and Anastasios~I Mourikis.
+\newblock Real-time motion tracking on a cellphone using inertial sensing and a
+  rolling-shutter camera.
+\newblock In {\em Robotics and Automation (ICRA), 2013 IEEE International
+  Conference on}, pages 4712--4719. IEEE, 2013.
+
+\bibitem{thrun2005probabilistic}
+Sebastian Thrun, Wolfram Burgard, and Dieter Fox.
+\newblock {\em Probabilistic robotics}.
+\newblock MIT press, 2005.
+
+\bibitem{skoda2015camera}
+Jan Skoda and Roman Bart{\'a}k.
+\newblock Camera-based localization and stabilization of a flying drone.
+\newblock In {\em The Twenty-Eighth International Flairs Conference}, 2015.
+
+\bibitem{matzner2015short}
+Filip Matzner and Roman Bart{\'a}k.
+\newblock Short-term motion tracking using inexpensive sensors.
+\newblock In {\em Advances in Artificial Intelligence and Its Applications},
+  pages 583--601. Springer, 2015.
+
+\bibitem{iphone-spec-chipworks}
+St.J. Dixon-Warren.
+\newblock Comparing the invensense and bosch accelerometers found in the iphone
+  6, September 2014.
+
+\bibitem{sparkfun-buying-guide}
+Accelerometer, gyro and imu buying guide.
+
+\bibitem{apple-event-handling-guide-for-ios}
+
+
+\bibitem{palais2007euler}
+Bob Palais and Richard Palais.
+\newblock Euler's fixed point theorem: The axis of a rotation.
+\newblock {\em Journal of Fixed Point Theory and Applications}, 2(2):215--220,
+  2007.
+
+\bibitem{titterton2004strapdown}
+David Titterton and John~L Weston.
+\newblock {\em Strapdown inertial navigation technology}, volume~17.
+\newblock IET, 2004.
+
+\end{thebibliography}

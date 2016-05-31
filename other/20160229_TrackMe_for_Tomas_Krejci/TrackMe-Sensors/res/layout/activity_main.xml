@@ -1,0 +1,118 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/textSensorChooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_sensor_chooser"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <RadioGroup
+        android:id="@+id/radioSensorChooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textSensorChooser"
+        android:orientation="vertical" >
+
+        <RadioButton
+            android:id="@+id/radioNativeAccelGyro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/radio_native_accel_gyro" />
+
+        <RadioButton
+            android:id="@+id/radioAccelGyro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_accel_gyro" />
+
+        <RadioButton
+            android:id="@+id/radioLinearAcceleration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/radio_linear_acceleration" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textOutputChooser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioSensorChooser"
+        android:text="@string/text_output_chooser"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <CheckBox android:id="@+id/checkboxFolderOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textOutputChooser"
+        android:text="@string/checkbox_folder_output" />
+    
+	<RelativeLayout
+        android:id="@+id/folderOutputSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkboxFolderOutput">
+
+        <EditText
+            android:id="@+id/edittextFolderName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/edittext_folder_name_hint"
+            android:text="@string/edittext_folder_name_default" 
+            android:inputType="text" />
+
+    </RelativeLayout>
+    
+    <CheckBox android:id="@+id/checkboxNetworkOutput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/folderOutputSettings"
+        android:text="@string/checkbox_network_output" />
+
+	<LinearLayout
+        android:id="@+id/networkOutputSettings"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkboxNetworkOutput">
+        <EditText
+		    android:id="@+id/edittextNetworkAddress"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="0.7"
+		    android:hint="@string/edittext_network_address_hint" 
+		    android:inputType="text" />
+        <EditText
+		    android:id="@+id/edittextNetworkPort"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="0.3"
+		    android:hint="@string/edittext_network_port_hint" 
+		    android:inputType="text" />
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal" >
+
+        <ToggleButton
+            android:id="@+id/toggleRecording"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRecordToggleClicked"
+            android:textOff="@string/button_start_recording"
+            android:textOn="@string/button_stop_recording" />
+
+    </LinearLayout>
+</RelativeLayout>

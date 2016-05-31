@@ -1,0 +1,28 @@
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+1 to 3 pages
+
+describe problem, structure at the end
+
+
+\section{Cíl práce}
+
+Na konci by měl být program, který je schopný dělat lokalizaci pomocí IMU a videa z kamery s kompenzací rolling shutter. Navíc by SW měl být schopen kompenzovat naakumulovanou chybu tím, že si bude tvořit interní mapu a v ní pomocí loop closure opravovat chyby. 
+
+Další požadavky:
+\begin{itemize}
+\item Bude to balíček do ROSu (i když vývoj bude pravděpodobně probíhat jinak)
+\item Otevřená licence
+\item Musíme být schopni snadno ověřit výsledky (nějak snadno porovnatelné s ground truth)
+\item Celá lokalizace by měla být energeticky nenáročná
+\item Kalibrace by neměla vyžadovat žádné speciální znalosti (například časy uzávěrky apod.)
+\end{itemize}
+
+\section{Co očekávám, že bude moje přidaná hodnota}
+
+Největší "akademická přidaná hodnota" by mělo být přidání globální mapy a loop closure k metodě založené na IMU. To pokud ví, nikdo nemá.
+
+Další velká přidaná hodnota bude v otevřenosti samotného řešení. Opět, asi v současné době nejsou naimplementované žádné open-source řešení, která by fungovala takto sofistikovaně i s kamerou atp.
+
+Integrace různých senzorů, stačí popsat jak se to udělá na nějaké hrubší úrovni.

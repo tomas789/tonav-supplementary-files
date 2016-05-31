@@ -1,0 +1,61 @@
+Cosi k diplomce
+===============
+
+Cíl práce
+--------- 
+
+Na konci by měl být program, který je schopný dělat lokalizaci pomocí IMU a videa z kamery s kompenzací rolling shutter. Navíc by SW měl být schopen kompenzovat naakumulovanou chybu tím, že si bude tvořit interní mapu a v ní pomocí loop closure opravovat chyby. 
+
+Další požadavky:
+ * Bude to balíček do ROSu (i když vývoj bude pravděpodobně probíhat jinak)
+ * Otevřená licence
+ * Musíme být schopni snadno ověřit výsledky (nějak snadno porovnatelné s ground truth)
+ * Celá lokalizace by neměl být moc energeticky náročná
+ * Kalibrace by neměla vyžadovat žádné speciální znalosti (například časy uzávěrky apod.)
+
+
+Co očekávám, že bude moje přidaná hodnota
+-----------------------------------------
+
+Největší "akademická přidaná hodnota" by mělo být přidání globální mapy a loop closure k metodě založené na IMU. To pokud ví, nikdo nemá.
+
+Další velká přidaná hodnota bude v otevřenosti samotného řešení. Opět, asi v současné době nejsou naimplementované žádné open-source řešení, která by fungovala takto sofistikovaně i s kamerou atp.
+
+
+Related work
+------------
+
+http://wiki.ros.org/robot_pose_ekf - Jednoduchá lokalizace pomocí EKF
+
+http://wiki.ros.org/robot_localization - Možnosti pomocí UKF nebo EKF. Umí zakomponovat i GPS a VO, ale není nijak zvlášť sofistikované.
+
+Li, M., Kim, B.H., Mourikis, A.: Real-time motion tracking on a cellphone using
+inertial sensing and a rolling-shutter camera. In: IEEE International Conference
+on Robotics and Automation (ICRA), pp. 4712–4719, May 2013
+
+Tohle je ten hlavní článek o lokalizaci pomocí IMU a kamery s rolling shutter
+
+Postup
+------
+
+Tady nastíním postup takový, aby byl co možná nejkratší, inkrementální a jednotlivé kroky šly snadno ověřit a měly nějaký význam sami o sobě.
+
+Celý vývoj budu dělat nejprve na svém iPhonu, protože má vše potřebné, dostatečnou baterku a mám ho vždy u sebe. Mělo by mi to tedy pomoci usnadnit vývoj. Nese to s sebou drobnou komplikaci toho, že řešení musí být potom snadn portovatelné do ROSu. Navíc musím psát vše v C++ a pouze správně abstrahovat části, ktere interagují s okolním světem tak, abych je mohl snadno portovat pro ROS nebo jinou platformu.
+
+Nejdříve bych měl být schopný interpretovat data z IMU a správně odečítat z kamery. To je komplikované zejména proto, že na iPhone se vyvíjí ve swiftu.
+
+Další krok bude postavit kompletní INS pouze pomocí gyroskopu a akcelerometru. Tento krok bude jaksi "bokem", protože výsledné řešení bude používat EKF a bude fungovat trochu jinak. Myslím ale, že bude snadnější, když takto získám představu o tom, jak INS vlastně funguje. Potom mi to usnadní další vývoj.
+
+(Volitelně: Nejdřív naimplementovat metodu z článku na který se odvolávají. Možná to bude snazší.) 
+
+Potom bude cíl bude reimplementovat samotné EKF z článku doporučeného Filipem. Asi největší problém se zdá být samotné pochopení metody, protože se jedná o ne uplně obvyklou variantu EKF. 
+
+Déle je krok validace této metody jako takové a srovnání s výsledky uvedenými v originálním článku. Pro tohle bude největší problém mít rozmyšlenou správnou metodu měření chyby. V principu mě napadají dvě varianty. Jedna pomocí dvou GPS (High-Accuracy Differential Tracking of Low-Cost GPS Receivers, W Hedgecock, M Maroti, J Sallai, P Volgyesi, A Ledeczi) a potom pomocí loop closure, kde se ale dozvím jen celkovou naakumulovanou chybu.
+
+Potom vzít výsledky z předchozího kroku a přidat k nim tvorhu globální mapy tak, jak ji dělá ORB SLAM (ORB-SLAM: A Versatile and Accurate Monocular SLAM System). 
+
+
+
+
+
+

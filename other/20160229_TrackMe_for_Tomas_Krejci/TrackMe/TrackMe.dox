@@ -1,0 +1,63 @@
+/**
+\mainpage TrackMe library documentation
+
+The TrackMe library is a C++11 library for fusing the accelerometer, the
+gyroscope, and the magnetometer sensors into the displacement and orientation
+of a device. The library does not have any external dependencies.
+
+For the public interface of the library, see the \ref TrackMe.Tracker class.
+
+The incoming sensor events are placed into a thread-safe blocking queue and the
+library processes this queue in a different thread.
+
+The communication between the library and an application is performed through a
+system of callback functions. The callbacks have to be set before the software
+receives any sensor events. The callbacks will be called from the inner thread
+of the library, thus the receiving function has to ensure mutual exclusion. It
+can be achieved, for instance, by the same blocking queue used for the incoming
+events. This structure can be found in the BlockingDeque.hpp file.
+
+Usage of the library is very straightforward:
+- Include the `TrackMe.hpp` header.
+- Instantiate the `SensorEvent` template for your platform, or use the AndroidEvent.
+- Create an object of type Tracker<SensorEvent>.
+- Set Tracker callbacks for the variables you need.
+- Push events to the Tracker using the `receiveEvent()` function.
+
+Example - load Android events from the standard input stream:
+~~~~~~~~~~~~~~{.cpp}
+#include <iostream>
+#include <vector>
+
+#include "TrackMe.hpp"
+#include "AndroidEvent.hpp"
+using namespace TrackMe;
+
+void printDisplacement(const AndroidEvent &event)
+{
+  using ArrayMatrix::operator<<;
+  std::cout << "Displacement in time "
+            << event.timestamp
+            << " is [" << event.value << "].\n";
+}
+
+int main(int argc, char ** argv)
+{
+*  // initialization
+  Tracker<AndroidEvent> tracker;
+*  // try to read a configuration file
+  tracker.config().loadFile("trackme_config.txt");
+*  // set a callback for printing the displacement on the standard output
+  tracker.setDisplacementCallback(printDisplacement);
+
+*  // load events from the standard input
+  std::vector<char> buffer(AndroidEvent::byteArraySize);
+  while (std::cin.read(buffer.data(), AndroidEvent::byteArraySize)) {
+    auto event = AndroidEvent::fromByteArray(buffer);
+    tracker.receiveEvent(event);
+  }
+
+  return 0;
+}
+~~~~~~~~~~~~~~
+*/

@@ -1,0 +1,20 @@
+\contentsline {chapter}{Introduction}{3}{chapter*.3}
+\contentsline {section}{\numberline {0.1}C\IeC {\'\i }l pr\IeC {\'a}ce}{3}{section.0.1}
+\contentsline {section}{\numberline {0.2}Co o\IeC {\v c}ek\IeC {\'a}v\IeC {\'a}m, \IeC {\v z}e bude moje p\IeC {\v r}idan\IeC {\'a} hodnota}{3}{section.0.2}
+\contentsline {chapter}{\numberline {1}Preliminaries}{4}{chapter.1}
+\contentsline {chapter}{\numberline {2}Related works}{5}{chapter.2}
+\contentsline {chapter}{\numberline {3}My approach}{6}{chapter.3}
+\contentsline {section}{\numberline {3.1}iPhone specification}{6}{section.3.1}
+\contentsline {section}{\numberline {3.2}Architecture}{6}{section.3.2}
+\contentsline {section}{\numberline {3.3}Quaternions}{7}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Quaternions and rotation in $\mathbb {R}^3$}{8}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}Experimental results}{9}{chapter.4}
+\contentsline {chapter}{\numberline {5}Notes}{10}{chapter.5}
+\contentsline {section}{\numberline {5.1}Postup}{10}{section.5.1}
+\contentsline {section}{\numberline {5.2}Harmonogram}{11}{section.5.2}
+\contentsline {section}{\numberline {5.3}29. 2. 2016}{11}{section.5.3}
+\contentsline {section}{\numberline {5.4}7. 3. 2016}{11}{section.5.4}
+\contentsline {chapter}{Conclusion}{12}{chapter*.7}
+\contentsline {chapter}{List of Tables}{14}{chapter*.9}
+\contentsline {chapter}{List of Abbreviations}{15}{chapter*.10}
+\contentsline {chapter}{Attachments}{16}{chapter*.11}

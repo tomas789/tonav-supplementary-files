@@ -1,0 +1,58 @@
+# How many events are sampled for the statistics.
+# The statistics are used for a stillness detection and calibration.
+STILLNESS_ACC_EVENT_NUMBER = 16
+STILLNESS_GYR_EVENT_NUMBER = 32
+STILLNESS_MAG_EVENT_NUMBER = 32
+
+# When the software is deciding whether the sensor data are still, it measures
+# magnitude variance and difference between the initial force and the current
+# force. If the variance is less than threshold and difference is less than
+# epsilon, the sensor data are considered to be still.
+
+# Threshold settings
+# For accelerometer and magnetometer the threshold is compared to variance.
+# For gyroscope it is compared to squares from y=0.
+STILLNESS_ACC_VARIANCE_THRESHOLD = 0.01
+STILLNESS_GYR_SQUARES_THRESHOLD = 0.1
+STILLNESS_MAG_VARIANCE_THRESHOLD = 0.15
+
+# Epsilon settings
+# Be cautious, some accelerometers can measure gravity +- 1ms^-2 when
+# the device is turned over (Samsung Galaxy S III).
+# To turn off the stabilization, set these to negative values.
+STILLNESS_GRAVITY_EPSILON = 1.5
+STILLNESS_MAG_FIELD_EPSILON = 30.0
+
+# If the device is still, multiply the velocity by this value.
+STILLNESS_SPEED_QUOCIENT = 0.0
+
+# If the device is still, should the gravity magnitude be updated?
+# It might be necessary if the device measures different acceleration
+# when rotated. Otherwise the gravity would create a fake acceleration.
+# (1=true, 0=false)
+STILLNESS_UPDATE_GRAVITY = 1
+
+# Number of events that are dropped at the very beginning of processing.
+ACC_DROP_INIT = 32
+GYR_DROP_INIT = 32
+MAG_DROP_INIT = 32
+
+# When a magnitude of an event is less than this number, zero the values.
+# Can be useful for a noise removal. Set to 0.0 to disable.
+ACC_EPSILON_ZERO = 0.07
+VEL_EPSILON_ZERO = 0.3
+GYR_EPSILON_ZERO = 0.02
+
+# GUI only configuration
+
+# TCP port number for the server
+TCP_PORT = 50000
+
+# Length of time interval in milliseconds between replots.
+PLOT_REFRESH_INTERVAL = 100
+# Length of time interval in milliseconds visualized by plots.
+PLOT_INTERVAL = 10000
+
+# Size of the exported svg canvas in millimeters
+SVG_EXPORT_WIDTH = 300
+SVG_EXPORT_HEIGHT = 200

@@ -1,0 +1,57 @@
+\chapter{Related works}
+
+with structure!!!
+
+more precise definitions
+
+\verb+http://wiki.ros.org/robot_pose_ekf+ - Jednoduchá lokalizace pomocí EKF
+
+\verb+http://wiki.ros.org/robot_localization+ - Možnosti pomocí UKF nebo EKF. Umí zakomponovat i GPS a VO, ale není nijak zvlášť sofistikované.
+
+Li, M., Kim, B.H., Mourikis, A.: Real-time motion tracking on a cellphone using
+inertial sensing and a rolling-shutter camera. In: IEEE International Conference
+on Robotics and Automation (ICRA), pp. 4712–4719, May 2013
+
+Tohle je ten hlavní článek o lokalizaci pomocí IMU a kamery s rolling shutter
+
+\textbf{High-accuracy differential tracking of low-cost GPS receivers} 
+
+\cite{hedgecock2013high}
+\href{http://www.isis.vanderbilt.edu/projects/relativeGPS}{Web}\href{https://www.youtube.com/watch?v=BH149tSPrhs}{Youtube}
+
+They implemented relative GPS position tracking which I can use as ground truth. They estimated accuracy of the system to be much better then I need. If I can make it work I can use it without any other justification (maybe?). Only think I need to make it work is two GPS receivers. It looks like they don't have to be same model or even manufacturer.
+
+Method is implemented in Java. Only think I have to do is implement three interfaces. One for input GPS stream, one for byte array transfer over the network and one for data output. It seems to be reasonable easy to implement in matter of days (or maybe hours). 
+
+\textbf{Real-time motion tracking on a cellphone using inertial sensing and a rolling-shutter camera}
+
+\cite{li2013real} 
+\href{http://www.ee.ucr.edu/~mli/RollingShutterVIO.html}{Web}
+
+This is the main article. I have to study this one more deeply.
+
+\textbf{Probabilistic robotics}
+
+\cite{thrun2005probabilistic}
+
+This is very good book recommanded by Barták and Obdržálek. They have nice derivation of Kalman Filter. I'll probably use this as primary source of teoretical part.
+
+\textbf{Camera-Based Localization and Stabilization of a Flying Drone}
+
+\cite{skoda2015camera}
+
+This paper was recommanded to me by Barták. It promisses to do VO based camera localization using keypoints.
+
+It also looks like there is nice derivation of EKF and it's usege for localization.
+
+\textbf{Short-Term Motion Tracking Using Inexpensive Sensors}
+
+\cite{matzner2015short}
+
+There is really nice derivation for INS without rotation. It's very simple to understand. INS derivation uses some kind of rotation matrix which is very complicated. Maybe I can look at derivation of INS using quaternions for rotation. It might be simpler.
+
+\textbf{Start Developing iOS Apps (Swift)}
+
+\href{https://developer.apple.com/library/ios/referencelibrary/GettingStarted/DevelopiOSAppsSwift/}{Web}
+
+This is very nice tutorial about programming iOS apps with Swift. I'll use it as starting point.

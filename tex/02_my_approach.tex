@@ -1,0 +1,170 @@
+\chapter{My approach}
+
+Definition of my problem. 
+
+I'll try to describe my problem step by step. Starting with simplest navigation up to final result.
+
+Maybe there'll be one chapter/section with description of final solution.
+
+\section{iPhone specification}
+
+It appears that iPhone 6s has MPU-6500 IMU \cite{iphone-spec-chipworks}. It should have precision of 250 (units?). Best gyro I was able to find was 200 from Sparkfun \cite{sparkfun-buying-guide}.
+
+iPhone provides me only with accelerometer data in units G. This is bad for my application. I found on Wiki gravitation field in Frankfurt to be $9.81412$ measured 25. 1. 2016.
+\todo{Where this number comes from}
+
+There is possibility to at least estimate size of G-force by formula from wiki - Gravity of Earth.
+
+Another way is to query Wolfram Alpha "gravitation acceleration, Prague". The result is $9.81373$. Based on EGM2008 12th order model, 223 meters above sea level
+
+\section{Architecture}
+
+I'll use my iPhone for computing all navigation tasks. It's good for
+\begin{itemize}
+\item I already have it
+\item I don't have to resolve issues connected with hardware
+\item IMU is correctly mounted on rigid body with camera (I've read a paper that says this was major source of error for them. Sadly I can't remember what the paper was. I only remember they shoot rocket and measured properties of IMU).
+\item It is standard device. So everybody can easily imagine what is required to run this software
+\item I have it everywhere with me
+\end{itemize}
+
+But there are also problems with this decision
+\begin{itemize}
+\item I can't controll precisely my HW
+\item I'm limited to Apple's API
+\item I don't know if apple do any preprocessing of data. According to \cite{apple-event-handling-guide-for-ios} it should be raw data.
+\end{itemize}
+
+For visualization I'll send all results over the network to ROS and then visualize them here. Main advantages are
+
+\begin{itemize}
+\item I don't have to study iOS development deeply.
+\item Almost everything is ready for visualization in ROS.
+\item ROS application might be quite simple
+\item I can send GPS data too and then compute ground truth on ROS-device
+\item I'm not limited to small display of iPhone
+\item I can spend a lot of computing power on visualization
+\item Network communication is relatively easy
+\end{itemize}
+
+Disadvantages
+\begin{itemize}
+\item I have to have another device for visualization
+\end{itemize}
+
+
+
+\section{Quaternions}
+
+I'll probably use quaternions for INS. So it'd be great to have one place to keep review of quaternions at.
+
+Quaternion $Q$ is
+$$Q = \left( 1 q_1, i q_2, j q_3, k q_4 \right)$$
+
+with following rules
+\begin{align}
+\label{eqn:quaternion-properties-1}
+i^2 &= -1 & j^2 &= -1 & k^2 &= -1
+\end{align}
+\begin{equation}
+\begin{align*}
+\label{eqn:quaternion-properties-2}
+i j &= k & j i &= -k \\
+j k &= i & k j &= -i \\
+k i &= j & i k &= -j
+\end{align*}
+\end{equation}
+
+
+\textbf{Quaternion addition} is defined as
+$$P+Q = (p_1 + q_1) + (p_2 + q_2)i + (p_3 + q_3)j + (p_4+q_4)k$$
+
+\begin{observation}
+Quaternoin addition is associative
+$$P+Q=Q+P$$ 
+\end{observation}
+
+\begin{observation}
+Quaternoin addition is commutative
+$$(P+Q)+R=P+(Q+R)$$ 
+\end{observation}
+
+\begin{definition}[Quaternion multiplication]
+\begin{align*}
+PQ &= (p_1 + i p_2 + j p_3 + k p_4) (q_1 + i q_2 + j q_3 + k q_4) \\
+&= p_1 q_1 - p_2 q_2 - p_3 q_3 - p_4 q_4 \\
+& \quad + i (p_1 q_2 + p_2 q_1 + p_3 q_4 - p_4 q_3) \\
+& \quad + j (p_1 q_3 + p_p q_1 + p_4 q_2 - p_2 q_4) \\
+& \quad + k (p_1 q_4 + p_4 q_1 + p_2 q_3 - p_3 q_2)
+\end{align*}
+\end{definition}
+
+Definition of quaternion multiplication is similar to polynomial multiplication wrt. properties \ref{eqn:quaternion-properties-1} and \ref{eqn:quaternion-properties-2}.
+
+Maybe better memorizable if following table
+
+\begin{center}
+\begin{tabular}{c||c|c|c|c}
+      & $q_1$ & $q_2$ & $q_3$ & $q_4$ \\
+\hline \hline
+$p_1$ & $1$   & $i$   & $j$   & $k$ \\
+\hline
+$p_2$ & $i$   & $-1$  & $k$   & $-j$ \\
+\hline
+$p_3$ & $j$   & $-k$  & $-1$  & $i$ \\
+\hline
+$p_4$ & $k$   & $j$   & $-i$  & $-1$
+\end{tabular}
+\end{center}
+
+Which says that coefficient of term of $PQ$ with $p_i q_j$ can be found in table at row $p_i$ and column $q_j$.
+
+\begin{definition}[Quaternion conjugates]
+$$\overline{Q} = \overline{(q_1 + i q_2 + j q_3 + k q_4)} \equiv (q_i - i q_2 - j q_3 - k q_4)$$
+\end{definition}
+
+\begin{observation}
+$(Q \overline{Q}) \in \mathbb{R}$
+\end{observation}
+
+\begin{observation}
+$(Q + \overline{Q}) \in \mathbb{R}$
+\end{observation}
+
+\begin{observation}
+$\overline{P+Q} = \overline{P} + \overline{Q}$
+\end{observation}
+
+\begin{observation}
+$\overline{PQ} = \overline{Q} \cdot \overline{P}$
+\end{observation}
+
+\begin{definition}[Quaternion norm]
+$$|Q| = \sqrt{q_1^2 + q_2^2 + q_3^2 + q_4^2}$$
+\end{definition}
+
+\begin{observation}
+$Q \overline{Q} = \overline{Q} Q = |Q|^2$
+\end{observation}
+
+\subsection{Quaternions and rotation in $\mathbb{R}^3$}
+
+\begin{theorem}{Rotation matrix theorem}
+Rotation matrices are precisely those orthogonal matrices $A$ with $\det A = +1$.
+\end{theorem}
+
+Proof can be found in \href{https://www2.bc.edu/~reederma/Linalg17.pdf}{Mark Reeder's course Math 210 Linear Algebra, lesson 17}.
+
+\todo{How to cite this correctly}
+
+\begin{theorem}{Euler's theorem}
+If $R$ is $3 \times 3$ matrix satistying $R^T R = R R^T = I$ and $\det R = +1$, then there is a non-zero vector $v$ satisfying $Rv = v$.
+\end{theorem}
+
+Proof of this theorem can be found in \cite{palais2007euler}.
+
+\todo{Why rotation matrix in 3-space can be described by orthogonal matrix with determinant +1.}
+
+This theorem tells us that we can describe every rotation in $\mathbb{R}^3$ as vector $v$ and angle $\theta$.
+
+As a consequence of Euler's theorem we can say that any composition of rotations in $\mathbb{R}^3$ can be described in this way. This fact isn't immediately obvious. 

@@ -1,0 +1,87 @@
+\chapter{Notes}
+
+\section{Postup}
+
+Tady nastíním postup takový, aby byl co možná nejkratší, inkrementální a jednotlivé kroky šly snadno ověřit a měly nějaký význam sami o sobě.
+
+\begin{enumerate}
+
+\item Jeste v prvni fazi posbirat co nejvice clanku, nakouknout a precist. Vytvorit si nejaky teoreticky zaklad.
+
+\item Celý vývoj budu dělat nejprve na svém iPhonu, protože má vše potřebné, dostatečnou baterku a mám ho vždy u sebe. Mělo by mi to tedy pomoci usnadnit vývoj. Nese to s sebou drobnou komplikaci toho, že řešení musí být potom snadn portovatelné do ROSu. Navíc musím psát vše v C++ a pouze správně abstrahovat části, ktere interagují s okolním světem tak, abych je mohl snadno portovat pro ROS nebo jinou platformu.
+[21 days]
+
+\item Nejdříve bych měl být schopný interpretovat data z IMU a správně odečítat z kamery. To je komplikované zejména proto, že na iPhone se vyvíjí ve swiftu.
+
+\item Další krok bude postavit kompletní INS pouze pomocí gyroskopu a akcelerometru. Tento krok bude jaksi "bokem", protože výsledné řešení bude používat EKF a bude fungovat trochu jinak. Myslím ale, že bude snadnější, když takto získám představu o tom, jak INS vlastně funguje. Potom mi to usnadní další vývoj.
+
+\item (Volitelně: Nejdřív naimplementovat metodu z článku na který se odvolávají. Možná to bude snazší.) 
+
+\item Potom bude cíl bude reimplementovat samotné EKF z článku doporučeného Filipem. Asi největší problém se zdá být samotné pochopení metody, protože se jedná o ne uplně obvyklou variantu EKF. 
+
+\item Déle je krok validace této metody jako takové a srovnání s výsledky uvedenými v originálním článku. Pro tohle bude největší problém mít rozmyšlenou správnou metodu měření chyby. V principu mě napadají dvě varianty. Jedna pomocí dvou GPS (High-Accuracy Differential Tracking of Low-Cost GPS Receivers, W Hedgecock, M Maroti, J Sallai, P Volgyesi, A Ledeczi) a potom pomocí loop closure, kde se ale dozvím jen celkovou naakumulovanou chybu.
+
+\item Potom vzít výsledky z předchozího kroku a přidat k nim tvorhu globální mapy tak, jak ji dělá ORB SLAM (ORB-SLAM: A Versatile and Accurate Monocular SLAM System). 
+
+\item Nakonec porovnání s předchozí variantou o kolik se mi podařilo zpřesnit navigaci.
+\end{enumerate}
+
+\section{Harmonogram}
+
+\begin{itemize}
+\item \textbf{začátek května} Mít definované přesné zadání práce.
+\item \textbf{do 28. 7. 2016} Odevzdání bakalářských a diplomových prací pro podzimní termín státních závěrečných zkoušek 
+Přihlášení se k podzimnímu termínu bakalářských a magisterských státních závěrečných zkoušek 
+Uzavření studia závěrečných ročníků bakalářského a magisterského studia – kontrola splnění všech podmínek pro připuštění k podzimnímu termínu SZZ 
+\end{itemize}
+
+
+
+\section{29. 2. 2016}
+\begin{itemize}
+\item \textit{Ask Filip Matzner about his Master's thesi}
+
+He'll do neuroevolution.
+
+\item \textit{Ask Filip for his sources}
+
+Filip sent me his sources. I'll have a look at it. Thanks Filip! :)
+
+\item \textit{Look at web of paper publisher if there are any additional files}
+
+It looks like there are no additional files at \href{http://ieeexplore.ieee.org/xpl/abstractSimilar.jsp?arnumber=6631248&tag=1}{web}.
+
+
+\item \textit{Contact Tomas Prochazka (tms.prochazka@gmail.com) about his visualization in thesis}
+
+I contacted him. I meet him and talked about visualization and his work in general. He uses Java only. For visualization he use JFreeChart library. It looks like quite powerful library for static plots. However for animation and 3D it doesn't seems to be best choice. I'll probably not use any of this.
+
+\item \textit{Bakalářka Jan Škoda, bude mít odkaz na článek ze kterého se vycházelo, možná má nějaký článek. Stabilizace drona na základě VO feature based.}
+
+I've downloaded the paper. I've added section below with comments about the paper.
+
+\end{itemize}
+
+\section{7. 3. 2016}
+\begin{itemize}
+\item \textit{How to deal with HW. Is there any kind of support? Does anybody have two same GPS receivers?}
+
+Ask Obdrzalek about HW. He may borrow me somethink.
+
+\item \textit{Can I ask library to buy book \cite{titterton2004strapdown}?}
+
+Bartak will think about this. Maybe he will buy it from grant or ask library.
+
+\item \textit{How to properly cite web pages.}
+
+I don't have to strictly follor ISO 960. I'll use the best option for citations I can find.
+
+\end{itemize}
+
+
+
+
+
+
+
+

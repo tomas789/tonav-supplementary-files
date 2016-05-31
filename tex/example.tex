@@ -1,0 +1,46 @@
+%%% Ukázka použití některých konstrukcí LaTeXu
+
+\subsection{Ukázka \LaTeX{}u}
+\label{ssec:ukazka}
+
+This short subsection serves as an~example of basic \LaTeX{} constructs,
+which can be useful for writing a~thesis.
+
+Let us start with lists:
+
+\begin{itemize}
+\item The logo of Matfyz is displayed in figure~\ref{fig:mff}.
+\item This is subsection~\ref{ssec:ukazka}.
+\item Citing literature~\cite{lamport94}.
+\end{itemize}
+
+Different kinds of dashes:
+red-black (short),
+pages 16--22 (middle),
+$45-44$ (minus),
+and this is --- as you could have expected --- a~sentence-level dash,
+which is the longest.
+(Note that we have follwed \verb|a| by a~tilde instead of a~space
+to avoid line breaks at that place.)
+
+\newtheorem{theorem}{Theorem}
+\newtheorem*{define}{Definition}	% Definice nečíslujeme, proto "*"
+
+\begin{define}
+A~{\sl Tree} is a connected graph with no cycles.
+\end{define}
+
+\begin{theorem}
+This theorem is false.
+\end{theorem}
+
+\begin{proof}
+False theorems do not have proofs.
+\end{proof}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=30mm]{../img/logo.eps}
+	\caption{Logo of MFF UK}
+	\label{fig:mff}
+\end{figure}

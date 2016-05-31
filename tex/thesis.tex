@@ -1,0 +1,287 @@
+%%% Hlavní soubor. Zde se definují základní parametry a odkazuje se na ostatní části. %%%
+
+%% Verze pro jednostranný tisk:
+% Okraje: levý 40mm, pravý 25mm, horní a dolní 25mm
+% (ale pozor, LaTeX si sám přidává 1in)
+\documentclass[12pt,a4paper]{report}
+\setlength\textwidth{145mm}
+\setlength\textheight{247mm}
+\setlength\oddsidemargin{15mm}
+\setlength\evensidemargin{15mm}
+\setlength\topmargin{0mm}
+\setlength\headsep{0mm}
+\setlength\headheight{0mm}
+% \openright zařídí, aby následující text začínal na pravé straně knihy
+\let\openright=\clearpage
+
+%% Pokud tiskneme oboustranně:
+% \documentclass[12pt,a4paper,twoside,openright]{report}
+% \setlength\textwidth{145mm}
+% \setlength\textheight{247mm}
+% \setlength\oddsidemargin{15mm}
+% \setlength\evensidemargin{0mm}
+% \setlength\topmargin{0mm}
+% \setlength\headsep{0mm}
+% \setlength\headheight{0mm}
+% \let\openright=\cleardoublepage
+
+%% Použité kódování znaků: obvykle latin2, cp1250 nebo utf8:
+\usepackage[utf8]{inputenc}
+
+%% Ostatní balíčky
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{todonotes}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem*{cor}{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+
+\newtheorem{observation}{Observation}
+
+%% Balíček hyperref, kterým jdou vyrábět klikací odkazy v PDF,
+%% ale hlavně ho používáme k uložení metadat do PDF (včetně obsahu).
+%% POZOR, nezapomeňte vyplnit jméno práce a autora.
+\usepackage[ps2pdf,unicode]{hyperref}   % Musí být za všemi ostatními balíčky
+\hypersetup{colorlinks=true}
+\hypersetup{pdftitle=Název práce}
+\hypersetup{pdfauthor=Tomáš Krejčí}
+
+%%% Drobné úpravy stylu
+
+% Tato makra přesvědčují mírně ošklivým trikem LaTeX, aby hlavičky kapitol
+% sázel příčetněji a nevynechával nad nimi spoustu místa. Směle ignorujte.
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries \thechapter. #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\def\@makeschapterhead#1{
+  {\parindent \z@ \raggedright \normalfont
+   \Huge\bfseries #1
+   \par\nobreak
+   \vskip 20\p@
+}}
+\makeatother
+
+% Toto makro definuje kapitolu, která není očíslovaná, ale je uvedena v obsahu.
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+\begin{document}
+
+% Trochu volnější nastavení dělení slov, než je default.
+\lefthyphenmin=2
+\righthyphenmin=2
+
+%%% Titulní strana práce
+
+\pagestyle{empty}
+\begin{center}
+
+\large
+
+Charles University in Prague
+
+\medskip
+
+Faculty of Mathematics and Physics
+
+\vfill
+
+{\bf\Large MASTER THESIS}
+
+\vfill
+
+\centerline{\mbox{\includegraphics[width=60mm]{img/logo.pdf}}}
+
+\vfill
+\vspace{5mm}
+
+{\LARGE Tomáš Krejčí}
+
+\vspace{15mm}
+
+% Název práce přesně podle zadání
+{\LARGE\bfseries Title of the thesis}
+
+\vfill
+
+% Název katedry nebo ústavu, kde byla práce oficiálně zadána
+% (dle Organizační struktury MFF UK)
+Name of the department or institute
+
+\vfill
+
+\begin{tabular}{rl}
+
+Supervisor of the master thesis: & First and last name \\
+\noalign{\vspace{2mm}}
+Study programme: & programme \\
+\noalign{\vspace{2mm}}
+Specialization: & specialization \\
+\end{tabular}
+
+\vfill
+
+% Zde doplňte rok
+Prague 2016
+
+\end{center}
+
+\newpage
+
+%%% Následuje vevázaný list -- kopie podepsaného "Zadání diplomové práce".
+%%% Toto zadání NENÍ součástí elektronické verze práce, nescanovat.
+
+%%% Na tomto místě mohou být napsána případná poděkování (vedoucímu práce,
+%%% konzultantovi, tomu, kdo zapůjčil software, literaturu apod.)
+
+\openright
+
+\noindent
+Dedication.
+
+\newpage
+
+%%% Strana s čestným prohlášením k diplomové práci
+
+\vglue 0pt plus 1fill
+
+\noindent
+I declare that I carried out this master thesis independently, and only with the cited
+sources, literature and other professional sources.
+
+\medskip\noindent
+I understand that my work relates to the rights and obligations under the Act No.
+121/2000 Coll., the Copyright Act, as amended, in particular the fact that the Charles
+University in Prague has the right to conclude a license agreement on the use of this
+work as a school work pursuant to Section 60 paragraph 1 of the Copyright Act.
+
+\vspace{10mm}
+
+\hbox{\hbox to 0.5\hsize{%
+In ........ date ............
+\hss}\hbox to 0.5\hsize{%
+signature of the author
+\hss}}
+
+\vspace{20mm}
+\newpage
+
+%%% Povinná informační strana diplomové práce
+
+\vbox to 0.5\vsize{
+\setlength\parindent{0mm}
+\setlength\parskip{5mm}
+
+Název práce:
+Název práce
+% přesně dle zadání
+
+Autor:
+Tomáš Krejčí
+
+Katedra:  % Případně Ústav:
+Název katedry či ústavu, kde byla práce oficiálně zadána
+% dle Organizační struktury MFF UK
+
+Vedoucí diplomové práce:
+Jméno a příjmení s tituly, pracoviště
+% dle Organizační struktury MFF UK, případně plný název pracoviště mimo MFF UK
+
+Abstrakt:
+% abstrakt v rozsahu 80-200 slov; nejedná se však o opis zadání diplomové práce
+
+Klíčová slova:
+% 3 až 5 klíčových slov
+
+\vss}\nobreak\vbox to 0.49\vsize{
+\setlength\parindent{0mm}
+\setlength\parskip{5mm}
+
+Title:
+% přesný překlad názvu práce v angličtině
+
+Author:
+Tomáš Krejčí
+
+Department:
+Název katedry či ústavu, kde byla práce oficiálně zadána
+% dle Organizační struktury MFF UK v angličtině
+
+Supervisor:
+Jméno a příjmení s tituly, pracoviště
+% dle Organizační struktury MFF UK, případně plný název pracoviště
+% mimo MFF UK v angličtině
+
+Abstract:
+% abstrakt v rozsahu 80-200 slov v angličtině; nejedná se však o překlad
+% zadání diplomové práce
+
+Keywords:
+% 3 až 5 klíčových slov v angličtině
+
+\vss}
+
+\newpage
+
+%%% Strana s automaticky generovaným obsahem diplomové práce. U matematických
+%%% prací je přípustné, aby seznam tabulek a zkratek, existují-li, byl umístěn
+%%% na začátku práce, místo na jejím konci.
+
+\openright
+\pagestyle{plain}
+\setcounter{page}{1}
+\tableofcontents
+
+\newpage
+\openright
+\pagestyle{plain}
+\listoftodos
+
+%%% Jednotlivé kapitoly práce jsou pro přehlednost uloženy v samostatných souborech
+\include{00_introduction}
+
+\chapter{Preliminaries}
+
+
+\include{01_related_works}
+\include{02_my_approach}
+\include{03_experimental_results}
+\include{50_notes}
+
+% Ukázka použití některých konstrukcí LateXu (odkomentujte, chcete-li)
+% \include{example}
+
+\include{90_conclusion}
+
+%%% Seznam použité literatury
+\include{91_bibliography}
+
+%%% Tabulky v diplomové práci, existují-li.
+\chapwithtoc{List of Tables}
+
+%%% Použité zkratky v diplomové práci, existují-li, včetně jejich vysvětlení.
+\chapwithtoc{List of Abbreviations}
+
+%%% Přílohy k diplomové práci, existují-li (různé dodatky jako výpisy programů,
+%%% diagramy apod.). Každá příloha musí být alespoň jednou odkazována z vlastního
+%%% textu práce. Přílohy se číslují.
+\chapwithtoc{Attachments}
+
+\openright
+\end{document}
